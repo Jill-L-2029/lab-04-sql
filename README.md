@@ -80,7 +80,11 @@ Execute your `initialize.sql` script against the MySQL database:
 mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < initialize.sql
 ```
 
-Replace `COMPUTING_ID` with your UVA computing ID. The `-D` flag selects your database, so your SQL script does not need its own `USE` statement.
+Replace `COMPUTING_ID` with your UVA computing ID. The `-D` flag selects your database, so your SQL script does not need its own `USE` statement. For example, if your computing ID is `khs3z`:
+
+```bash
+mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_media < initialize.sql
+```
 
 **Password:** For MySQL access in AWS RDS, the password is the same as your computing ID.
 
@@ -136,7 +140,14 @@ export DBPASS='COMPUTING_ID'
 export DBNAME='COMPUTING_ID_mock'
 ```
 
-Replace `COMPUTING_ID` with your UVA computing ID.
+Replace `COMPUTING_ID` with your UVA computing ID. For example, if your computing ID is `khs3z`:
+
+```bash
+export DBHOST='ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com'
+export DBUSER='khs3z'
+export DBPASS='khs3z'
+export DBNAME='khs3z_mock'
+```
 
 ### Step 1: Create mock data
 
@@ -201,7 +212,7 @@ Create a script `process.py` under `src/sql_lab/` (the package directory created
 - Read DB host, DB name, DB user, DB password from environment variables.
 - Create a function `read_data` that loads the CSV into a pandas DataFrame. It should accept one argument `filename` and return a DataFrame.
 - Create a function `clean_data` that prepares the DataFrame for upload (e.g., handle missing values, rename columns, cast types). It should accept one argument `data`, remove rows with missing values, and return the cleaned DataFrame.
-- Create a function `load_data` that writes the DataFrame to MySQL. It should accept two arguments: `data` (your DataFrame) and `table` (the name of the table to create in the database; pick a name and remember it for Step 7). The function should create the specified table (if it doesn't exist) and upload the content of the DataFrame to it. Implement the upload using either **approach A** (row-by-row `INSERT`s with `mysql-connector-python`) or **approach B** (bulk upload with pandas + SQLAlchemy), described below.
+- Create a function `load_data` that writes the DataFrame to MySQL. It should accept two arguments: `data` (your DataFrame) and `table` (the destination table name). **Always pass `"mock"` as the table name** so its is consistent across all databases. The function should create the `mock` table (if it doesn't exist) and upload the DataFrame into it. Implement the upload using either **approach A** (row-by-row `INSERT`s with `mysql-connector-python`) or **approach B** (bulk upload with pandas + SQLAlchemy), described below.
 - Create a function `main` that calls `read_data`, `clean_data`, and `load_data` in sequence. Invoke `main` inside an `if __name__ == "__main__":` block.
 - Use logging to report status in each function.
 - Use a docstring at the beginning of each function.
@@ -221,24 +232,30 @@ uv run python src/sql_lab/process.py
 
 ### Step 6: Confirm table in database
 
-Connect to your database and verify that the table exists and holds the uploaded rows:
+Connect to your database and verify that the `mock` table exists and holds the uploaded rows:
 
 ```bash
 mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_mock
 ```
 
-```sql
-SHOW TABLES;
-DESCRIBE YOUR_TABLE_NAME;
-SELECT COUNT(*) FROM YOUR_TABLE_NAME;
-SELECT * FROM YOUR_TABLE_NAME LIMIT 5;
+For example, if your computing ID is `khs3z`:
+
+```bash
+mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_mock
 ```
 
-`SELECT COUNT(*) FROM YOUR_TABLE_NAME` returns a single number: how many rows are in the table (replace `YOUR_TABLE_NAME` with the actual name of your table). After a successful upload (and after `clean_data` drops rows with missing values), this count should match the number of rows remaining in your cleaned DataFrame, not necessarily the original 200 from Mockaroo.
+```sql
+SHOW TABLES;
+DESCRIBE mock;
+SELECT COUNT(*) FROM mock;
+SELECT * FROM mock LIMIT 5;
+```
+
+`SELECT COUNT(*) FROM mock` returns a single number: how many rows are in the table. After a successful upload (and after `clean_data` drops rows with missing values), this count should match the number of rows remaining in your cleaned DataFrame, not necessarily the original 200 from Mockaroo.
 
 ### Step 7: Develop a Python script to query the database
 
-In `src/sql_lab/`, create a new script `query.py` that retrieves data from the table you uploaded in Steps 4-6. Use [basic-sql.py](https://github.com/ksiller/DS2022/blob/main/class/04-sql/basic-sql.py) in the course repo as inspiration (especially `get_people_by_lastname` and `plot_continent_counts`), but adapt it to **your** table and columns. Do not assume the `media.MOCK_DATA` schema from the example.
+In `src/sql_lab/`, create a new script `query.py` that retrieves data from the `mock` table you uploaded in Steps 4-6. Use [basic-sql.py](https://github.com/ksiller/DS2022/blob/main/class/04-sql/basic-sql.py) in the course repo as inspiration (especially `get_people_by_lastname` and `plot_continent_counts`), but adapt it to **your** columns in `mock`. Do not assume the `media.MOCK_DATA` schema from the example.
 
 The script should follow the same best practices as `process.py` (parameterized queries, env vars for credentials, logging, docstrings, comments).
 
@@ -259,7 +276,7 @@ uv run python src/sql_lab/query.py
 
 ### [Optional] Step 8: DuckDB
 
-For an additional challenge, create `src/sql_lab/process_duckdb.py` and use [DuckDB](https://duckdb.org/) to create a local database and upload the new table to it. See an example in [class/04-sql/](https://github.com/ksiller/DS2022/tree/main/class/04-sql/).
+For an additional challenge, create `src/sql_lab/process_duckdb.py` and use [DuckDB](https://duckdb.org/) to create a local database and upload the `mock` table to it. See an example in [class/04-sql/](https://github.com/ksiller/DS2022/tree/main/class/04-sql/).
 
 ### [Optional] Step 9: Accept Excel spreadsheets
 
