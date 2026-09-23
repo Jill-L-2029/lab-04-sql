@@ -31,6 +31,8 @@ query = "SELECT id, name FROM users WHERE email = %s"  # %s is a placeholder
 cursor.execute(query, (email_str,))  # pass values as a tuple/list, not by formatting the string
 ```
 
+For a full `INSERT` example using the same pattern, see [Insert (Parameterized)](https://github.com/ksiller/DS2022/blob/main/class/04-sql/README.md#insert-parameterized) in the class materials (and [`insert_data.py`](https://github.com/ksiller/DS2022/blob/main/class/04-sql/insert_data.py)).
+
 ## Setup
 
 Install the `mycli` command line tool. Follow the [mycli install instructions](https://github.com/ksiller/DS2022/blob/main/class/04-sql/README.md).
