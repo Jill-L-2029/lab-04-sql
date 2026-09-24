@@ -3,7 +3,10 @@ import logging
 import mysql.connector
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+)
 logger = logging.getLogger(__name__)
 
 # Read database credentials from environment variables
@@ -14,78 +17,118 @@ DBPASS = os.getenv("DBPASS")
 
 
 def get_data_by_group(value):
-    """Retrieve rows from the mock table where the group column equals value."""
+    """Retrieve all rows from mock where the group column equals value."""
     logger.info("Getting rows where group = %s", value)
 
-    connection = mysql.connector.connect(
-        host=DBHOST,
-        database=DBNAME,
-        user=DBUSER,
-        password=DBPASS
-    )
+    connection = None
 
-    cursor = connection.cursor()
+    try:
+        # Connect to the user's database
+        connection = mysql.connector.connect(
+            host=DBHOST,
+            database=DBNAME,
+            user=DBUSER,
+            password=DBPASS,
+        )
 
-    # Use a parameterized query to safely filter by group
-    query = """
-    SELECT *
-    FROM mock
-    WHERE `group` = %s
-    """
+        cursor = connection.cursor()
 
-    cursor.execute(query, (value,))
-    results = cursor.fetchall()
+        # Use a parameterized query to filter by group
+        query = """
+        SELECT *
+        FROM mock
+        WHERE `group` = %s
+        """
 
-    logger.info("Retrieved %d rows", len(results))
+        cursor.execute(query, (value,))
+        results = cursor.fetchall()
 
-    cursor.close()
-    connection.close()
+        logger.info("Retrieved %d rows", len(results))
 
-    return results
+        cursor.close()
+        return results
+
+    except mysql.connector.Error as err:
+        logger.error("Database error: %s", err)
+        raise
+
+    finally:
+        # Close the database connection
+        if connection is not None and connection.is_connected():
+            connection.close()
+            logger.info("Database connection closed")
 
 
 def plot_counts(groupby):
     """Count rows in mock grouped by the specified column."""
     logger.info("Counting rows grouped by %s", groupby)
 
-    connection = mysql.connector.connect(
-        host=DBHOST,
-        database=DBNAME,
-        user=DBUSER,
-        password=DBPASS
-    )
+    # Only allow columns that actually exist in the mock table
+    allowed_columns = {
+        "id",
+        "group",
+        "in_stock",
+        "color",
+        "isbn",
+        "city",
+    }
 
-    cursor = connection.cursor()
+    if groupby not in allowed_columns:
+        raise ValueError(f"Invalid column name: {groupby}")
 
-    # Column names cannot be parameterized, so safely quote the column name.
-    query = f"""
-    SELECT `{groupby}`, COUNT(*) AS count
-    FROM mock
-    GROUP BY `{groupby}`
-    ORDER BY count DESC
-    """
+    connection = None
 
-    cursor.execute(query)
-    results = cursor.fetchall()
+    try:
+        # Connect to the user's database
+        connection = mysql.connector.connect(
+            host=DBHOST,
+            database=DBNAME,
+            user=DBUSER,
+            password=DBPASS,
+        )
 
-    logger.info("Retrieved counts for %d groups", len(results))
+        cursor = connection.cursor()
 
-    cursor.close()
-    connection.close()
+        # Column names cannot be parameterized, so quote the column name
+        query = f"""
+        SELECT `{groupby}`, COUNT(*) AS count
+        FROM mock
+        GROUP BY `{groupby}`
+        ORDER BY count DESC
+        """
 
-    return results
+        cursor.execute(query)
+        results = cursor.fetchall()
+
+        logger.info("Retrieved counts for %d groups", len(results))
+
+        cursor.close()
+        return results
+
+    except mysql.connector.Error as err:
+        logger.error("Database error: %s", err)
+        raise
+
+    finally:
+        # Close the database connection
+        if connection is not None and connection.is_connected():
+            connection.close()
+            logger.info("Database connection closed")
 
 
 def main():
     """Run the query functions and print their results."""
-    # Demonstrate filtering rows by the group column
-    group_results = get_data_by_group("A")
-    print("Rows where group = A:")
+
+    # Get rows for one group value
+    group_results = get_data_by_group("cat")
+
+    print("Rows where group = cat:")
     for row in group_results:
         print(row)
 
-    # Demonstrate counting rows by another column
+    # Count rows by color
     color_counts = plot_counts("color")
+
     print("\nCounts by color:")
     for color, count in color_counts:
         print(color, count)
