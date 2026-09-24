@@ -49,7 +49,7 @@ uv add mysql-connector-python pandas
 
 MySQL database access:
 
-- **DB host:** `ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com`
+- **DB host:** `ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com`
 - **DB port:** `3306`
 - **DB username:** your UVA computing ID
 - **DB password:** your UVA computing ID
@@ -79,13 +79,13 @@ Write SQL statements in `initialize.sql` that:
 Execute your `initialize.sql` script against the MySQL database:
 
 ```bash
-mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < initialize.sql
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < initialize.sql
 ```
 
 Replace `COMPUTING_ID` with your UVA computing ID. The `-D` flag selects your database, so your SQL script does not need its own `USE` statement. For example, if your computing ID is `khs3z`:
 
 ```bash
-mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_media < initialize.sql
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_media < initialize.sql
 ```
 
 **Password:** For MySQL access in AWS RDS, the password is the same as your computing ID.
@@ -103,7 +103,7 @@ Create a new file `media_query.sql` that contains a SQL SELECT query. Your query
 Execute the query and save the output to a file:
 
 ```bash
-mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < media_query.sql > media_results.txt
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < media_query.sql > media_results.txt
 ```
 
 Command line options:
@@ -131,7 +131,7 @@ Python packages (`mysql-connector-python`, `pandas`) were installed in the lab [
 **Environment variables:** Set your database connection variables in the terminal (same credentials as Case Study 1):
 
 ```bash
-export DBHOST='ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com'
+export DBHOST='ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com'
 export DBUSER='COMPUTING_ID'
 export DBPASS='COMPUTING_ID'
 export DBNAME='COMPUTING_ID_mock'
@@ -140,7 +140,7 @@ export DBNAME='COMPUTING_ID_mock'
 Replace `COMPUTING_ID` with your UVA computing ID. For example, if your computing ID is `khs3z`:
 
 ```bash
-export DBHOST='ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com'
+export DBHOST='ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com'
 export DBUSER='khs3z'
 export DBPASS='khs3z'
 export DBNAME='khs3z_mock'
@@ -232,13 +232,13 @@ uv run python src/sql_lab/process.py
 Connect to your database and verify that the `mock` table exists and holds the uploaded rows:
 
 ```bash
-mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_mock
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_mock
 ```
 
 For example, if your computing ID is `khs3z`:
 
 ```bash
-mycli -h ds2002.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_mock
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_mock
 ```
 
 ```sql
