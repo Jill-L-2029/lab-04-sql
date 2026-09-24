@@ -1,0 +1,201 @@
+id,group,in_stock,color,isbn,city
+1,cat,false,Orange,682659291-6,Emiliano Zapata
+2,cat,true,Turquoise,698190517-5,
+3,shoe,true,Blue,244392477-7,Buan
+4,cat,false,Blue,736748107-X,Xingzhen
+5,cat,true,Purple,146110781-4,Till
+6,shoe,true,Puce,029475745-7,Juazeiro do Norte
+7,scarf,true,Pink,418652878-0,Dongyang
+8,scarf,true,Green,888153721-4,Panggulan
+9,shoe,true,Orange,732604078-8,Santa Cruz de Guacas
+10,cat,true,Pink,103194486-9,
+11,,false,Violet,479496157-X,Andir
+12,scarf,true,Puce,699882006-2,Orël
+13,scarf,false,Fuscia,191516387-0,Filiátes
+14,shoe,false,Mauv,815943149-X,Matsumoto
+15,shoe,false,Orange,239653433-5,Bariri
+16,scarf,false,Yellow,913754676-7,
+17,scarf,true,Violet,890005694-8,Tengah
+18,cat,false,Pink,518073165-8,Asunción Mita
+19,cat,,Green,560411549-5,Drosáto
+20,cat,false,Mauv,972300785-1,Jinshan
+21,scarf,true,Mauv,696173464-2,
+22,cat,true,Aquamarine,616197056-2,Kampunglistrik
+23,shoe,true,Maroon,400620658-5,Kairouan
+24,scarf,true,Orange,214440804-1,Zili
+25,cat,false,Red,187319022-0,Wushan
+26,cat,false,Green,690187362-X,Qingyuan
+27,cat,true,Violet,119329594-7,Tha Maka
+28,,false,Red,141857853-3,Takayama
+29,cat,true,Turquoise,625193148-5,Marićka
+30,cat,false,Blue,579553749-7,Xinjiezi
+31,cat,false,Violet,834958771-7,Mê Linh
+32,shoe,true,Fuscia,774679540-4,Kasreman Wetan
+33,shoe,false,Crimson,132620134-4,Ankazobe
+34,shoe,true,Puce,389994445-3,Ryczów
+35,cat,false,Aquamarine,662014158-7,Xintaimen
+36,scarf,,Green,814547899-5,Baltimore
+37,cat,true,Yellow,080464564-7,Vetluga
+38,cat,,Aquamarine,833208726-0,Sudimoro
+39,scarf,false,Blue,785920195-X,Banes
+40,cat,false,Violet,934393196-4,Kingsey Falls
+41,cat,false,Crimson,319161764-7,Acajutla
+42,cat,false,Orange,501055511-5,San Rafael Oriente
+43,cat,true,Maroon,396822205-9,Dalakovo
+44,scarf,false,Goldenrod,317570375-5,Jerez
+45,scarf,true,Teal,634046981-7,Zarichne
+46,scarf,false,Puce,670993446-2,Sölvesborg
+47,shoe,false,Mauv,934917695-5,Jember
+48,shoe,false,Red,982563477-4,Piraí do Sul
+49,cat,false,Fuscia,192967315-9,Zarichne
+50,shoe,false,Orange,353842798-4,Tobruk
+51,shoe,true,Aquamarine,100141152-8,Xinglong
+52,shoe,false,Indigo,283004882-2,Maruoka
+53,,false,Fuscia,185612527-0,Dingqing
+54,shoe,false,Orange,134008370-1,Arras
+55,shoe,true,Puce,540179978-0,Chiang Yuen
+56,cat,false,Maroon,817617432-7,Biris Daja
+57,,false,Yellow,569053174-X,Nagato
+58,shoe,true,Mauv,617972166-1,Radviliskis
+59,,true,Puce,207675510-1,Tol’yatti
+60,scarf,false,Teal,633373572-8,Jiading
+61,shoe,true,Green,000949523-1,Palmital
+62,scarf,false,Red,421153310-X,Dallas
+63,shoe,false,Red,151416804-9,Boyle
+64,shoe,false,Maroon,924560374-1,Kefang
+65,cat,true,Mauv,127884068-0,Barrouallie
+66,cat,true,Yellow,148228918-0,
+67,scarf,false,Purple,992839170-X,San Agustín
+68,shoe,true,Crimson,453469667-1,Arrufó
+69,cat,true,Mauv,518557590-5,Dagou
+70,shoe,false,Blue,935408931-3,Talagasari
+71,shoe,true,Green,571000192-9,Xidoupu
+72,shoe,true,Violet,352042871-7,Noen Maprang
+73,cat,true,Green,066834020-7,Mufushan
+74,cat,false,Turquoise,992538386-2,Klippan
+75,scarf,true,Crimson,218351973-8,Kitsuki
+76,shoe,true,Aquamarine,947757304-3,Upi
+77,cat,true,Crimson,144671131-5,Tushi
+78,scarf,false,Puce,960322357-3,El Paso
+79,scarf,true,Yellow,707948461-8,Margarita
+80,scarf,true,Maroon,929223842-6,Gaocun
+81,shoe,false,Fuscia,540159466-6,
+82,cat,true,Khaki,075332886-0,San Lucas Tolimán
+83,cat,true,Goldenrod,247187787-7,Balfour
+84,cat,false,Indigo,111903887-1,Yanping
+85,shoe,true,Crimson,719202621-2,Changxuanling
+86,cat,false,Green,981686972-1,
+87,shoe,true,Maroon,219810807-0,Kambaxoi
+88,shoe,true,Maroon,592570043-0,Heerlen
+89,shoe,false,Turquoise,610978349-8,Ruihong
+90,cat,false,Yellow,264460100-2,Chenyangzhai
+91,scarf,false,Goldenrod,178004107-1,Brudzew
+92,scarf,true,Turquoise,842908911-X,Magway
+93,cat,false,Pink,831805496-2,Áno Kómi
+94,shoe,true,Aquamarine,392776359-4,Baião
+95,cat,false,Red,940688053-9,Tuqiao
+96,shoe,true,Teal,354294309-6,Sapeken
+97,scarf,false,Puce,340482561-6,Wang Thonglang
+98,cat,true,Aquamarine,359585446-2,
+99,,true,Crimson,035686159-7,Prínos
+100,cat,false,Purple,562247614-3,Sacapulas
+101,cat,true,Puce,350049875-2,Rožďalovice
+102,cat,false,Mauv,623657728-5,Chengyang
+103,,false,Maroon,823586397-9,Jinshan
+104,shoe,false,Blue,075658313-6,Chakaray
+105,scarf,false,Orange,192260006-7,Huanggang
+106,shoe,false,Violet,317735746-3,Dukuh Kaler
+107,cat,false,Aquamarine,936163677-4,
+108,shoe,false,Crimson,609732447-2,Nikol’skoye
+109,scarf,true,Purple,694030251-4,Kilju
+110,scarf,false,Khaki,862429621-8,Noisy-le-Grand
+111,scarf,true,Crimson,555417772-7,Baishan
+112,scarf,false,Khaki,986172721-3,Polo
+113,scarf,false,Blue,076458695-5,Xiejia
+114,scarf,false,Maroon,983655986-8,Arani
+115,shoe,false,Khaki,795333274-4,Kępno
+116,cat,false,Crimson,994933240-0,Sidaurip
+117,shoe,true,Orange,243508908-2,Lunang
+118,,,Yellow,057835390-3,Malvas
+119,,true,Blue,796998211-5,
+120,shoe,true,Pink,206621362-4,Kopang Satu
+121,scarf,true,Fuscia,352780374-2,Governador Valadares
+122,shoe,true,Teal,132937947-0,Piran
+123,shoe,true,Yellow,505469061-1,Turbaco
+124,shoe,true,Mauv,299896757-4,Ayorou
+125,shoe,false,Fuscia,632958833-3,Xiantang
+126,cat,true,Maroon,964424407-9,Želešice
+127,cat,false,Puce,241293111-9,Moriyama
+128,scarf,,Orange,685901401-6,Santander
+129,cat,true,Yellow,296851300-1,Altos
+130,shoe,false,Maroon,331107754-7,Cullhuas
+131,scarf,false,Yellow,566159183-7,Bjästa
+132,cat,false,Maroon,548379408-7,Nuwara Eliya
+133,shoe,false,Violet,522697522-8,Uyo
+134,scarf,false,Puce,396026082-2,Moravský Krumlov
+135,shoe,true,Indigo,641875250-3,Ntaur Satu
+136,cat,true,Teal,538026993-1,Armenia
+137,cat,true,Yellow,520449433-2,Täby
+138,cat,false,Aquamarine,156880487-3,Bauru
+139,scarf,false,Fuscia,185716675-2,Laka
+140,cat,false,Blue,040050580-0,Shatoujiao
+141,scarf,false,Violet,312195854-2,Sengkerang Tiga
+142,scarf,true,Mauv,266179314-3,Atami
+143,scarf,false,Teal,046382250-1,Basen
+144,cat,true,Red,916436685-5,Kashin
+145,shoe,true,Blue,162463352-8,Veliko Tŭrnovo
+146,scarf,,Green,667690846-8,Portland
+147,shoe,false,Maroon,779728894-1,Adamstown
+148,cat,false,Indigo,969304363-4,La Cuesta
+149,cat,false,Blue,702467280-3,Maturín
+150,scarf,false,Blue,561511190-9,La Mesa
+151,shoe,true,Green,195392467-0,Skulsk
+152,scarf,false,Crimson,279948595-2,Troyes
+153,scarf,false,Purple,310296271-8,Oyonnax
+154,shoe,true,Fuscia,188927331-7,
+155,cat,true,Purple,334031105-6,Priekulė
+156,shoe,false,Yellow,281674796-4,Bern
+157,scarf,false,Red,977996212-3,Divichibazar
+158,scarf,true,Khaki,566893264-8,Balzers
+159,shoe,true,Pink,980663884-0,Taling
+160,scarf,true,Goldenrod,898637629-6,Bezhta
+161,scarf,false,Teal,156123188-6,Shibīn al Kawm
+162,shoe,true,Turquoise,357418826-9,Jiaocun
+163,scarf,false,Aquamarine,816599347-X,Paraíso
+164,cat,true,Yellow,068911138-X,Kristiansand S
+165,,false,Fuscia,633645019-8,Antony
+166,scarf,true,Crimson,818842932-5,Montijo
+167,cat,true,Yellow,805089835-0,Ipirá
+168,cat,false,Pink,940285472-X,Dessalines
+169,shoe,false,Crimson,972697890-4,Katsina
+170,shoe,true,Goldenrod,759783261-3,Srednebelaya
+171,cat,true,Goldenrod,949792032-6,El Congo
+172,shoe,false,Yellow,749861374-3,Tianjin
+173,scarf,true,Mauv,114256075-9,Saidpur
+174,shoe,false,Purple,804825624-X,Rybno
+175,scarf,true,Indigo,866063708-9,Gantang
+176,shoe,true,Goldenrod,279954938-1,
+177,shoe,false,Green,771400641-2,Estância
+178,scarf,false,Green,841059059-X,Aktogay
+179,shoe,false,Violet,393642531-0,Buynaksk
+180,cat,false,Violet,416630803-3,Huangcun
+181,shoe,true,Purple,180277623-0,Kaoma
+182,shoe,true,Mauv,677968514-3,Kihancha
+183,shoe,false,Pink,697005993-6,Bologna
+184,,false,Crimson,380938178-0,Masaran
+185,shoe,false,Blue,331421914-8,Metchosin
+186,shoe,,Green,356527009-8,Vaggeryd
+187,shoe,true,Violet,440909888-8,Jawornik Polski
+188,scarf,true,Khaki,114525516-7,Vyshneye Dolgoye
+189,cat,false,Red,653729937-3,Cogreg Wetan
+190,scarf,false,Maroon,623552552-4,Zambujeira do Mar
+191,,false,Puce,586614145-0,Aniva
+192,shoe,true,Teal,201812686-5,San Roque
+193,scarf,true,Red,183503194-3,Heung-hai
+194,,false,Maroon,596397225-6,Mompach
+195,cat,false,Yellow,916532788-8,Sindangjawa
+196,shoe,true,Khaki,909366358-5,Banag
+197,shoe,,Puce,581644340-2,Phatthana Nikhom
+198,,false,Purple,482223096-1,
+199,cat,false,Yellow,466042287-9,Yahotyn
+200,cat,false,Orange,223510405-3,København

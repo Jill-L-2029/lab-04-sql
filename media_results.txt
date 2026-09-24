@@ -1,0 +1,2 @@
+username	email	title	content
+cody	cody@gmail.com	My First Post	Hello everyone!
