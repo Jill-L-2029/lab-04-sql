@@ -39,7 +39,7 @@ Install the `mycli` command line tool. Follow the [mycli install instructions](h
 
 Fork this repository on GitHub (keep the default name), then clone your fork. Recommended location: `~/ds2022-fall-2026/lab-04-sql`.
 
-Change into the `lab-04-sql` directory and initialize a virtual Python environment. You need the `mysql-connector-python` and `pandas` packages. `sqlalchemy` is optional (needed only for bulk upload approach B in Case Study 2).
+Change into the `lab-04-sql` directory and set up the Python project. Run `uv init` to create the project layout (including `src/sql_lab/`), then `uv add` to install packages. You need `mysql-connector-python` and `pandas`. `sqlalchemy` is optional (needed only for bulk upload approach B in Case Study 2).
 
 ```bash
 cd ~/ds2022-fall-2026/lab-04-sql
@@ -54,7 +54,7 @@ MySQL database access:
 - **DB username:** your UVA computing ID
 - **DB password:** your UVA computing ID
 
-The AWS RDS instance has two empty databases set up for you, `COMPUTING_ID_media` and `COMPUTING_ID_mock` (e.g., `khs3z_media` and `khs3z_mock`). Use `COMPUTING_ID_media` for Case Study 1 and `COMPUTING_ID_mock` for Case Study 2. You have full read-write privileges on both. Replace `COMPUTING_ID` with your UVA computing ID wherever you see it in this lab.
+>**Note:** The AWS RDS instance is shared, but access is per student. You have a MySQL user named after your UVA computing ID (password = your computing ID) with read-write privileges **only** on your two databases: `COMPUTING_ID_media` and `COMPUTING_ID_mock` (e.g., `khs3z_media` and `khs3z_mock`). You cannot read or write other students' databases. Use `COMPUTING_ID_media` for Case Study 1 and `COMPUTING_ID_mock` for Case Study 2. Replace `COMPUTING_ID` with your UVA computing ID wherever you see it in this lab. **Do not use the shared `ds2022` account for this lab.**
 
 ## Case Study 1: SQL CLI & Scripts
 
@@ -126,12 +126,7 @@ Include `initialize.sql`, `media_query.sql`, and `media_results.txt` in your `la
 
 ### Setup
 
-**Python packages:** `mysql-connector-python` and `pandas` should already be installed from the lab Setup above. If not, run:
-
-```bash
-cd ~/ds2022-fall-2026/lab-04-sql
-uv add mysql-connector-python pandas
-```
+Python packages (`mysql-connector-python`, `pandas`) were installed in the lab [Setup](#setup). If `import mysql.connector` or `import pandas` fails, re-run `uv add mysql-connector-python pandas` from the repo root.
 
 **Environment variables:** Set your database connection variables in the terminal (same credentials as Case Study 1):
 
@@ -214,7 +209,7 @@ Create a script `process.py` under `src/sql_lab/` (the package directory created
 - Read DB host, DB name, DB user, DB password from environment variables.
 - Create a function `read_data` that loads the CSV into a pandas DataFrame. It should accept one argument `filename` and return a DataFrame.
 - Create a function `clean_data` that prepares the DataFrame for upload (e.g., handle missing values, rename columns, cast types). It should accept one argument `data`, remove rows with missing values, and return the cleaned DataFrame.
-- Create a function `load_data` that writes the DataFrame to MySQL. It should accept two arguments: `data` (your DataFrame) and `table` (the destination table name). **Always pass `"mock"` as the table name** so its is consistent across all databases. The function should create the `mock` table (if it doesn't exist) and upload the DataFrame into it. Implement the upload using either **approach A** (row-by-row `INSERT`s with `mysql-connector-python`) or **approach B** (bulk upload with pandas + SQLAlchemy), described below.
+- Create a function `load_data` that writes the DataFrame to MySQL. It should accept two arguments: `data` (your DataFrame) and `table` (the destination table name). **Always pass `"mock"` as the table name** so it is consistent across all databases. The function should create the `mock` table (if it doesn't exist) and upload the DataFrame into it. Implement the upload using either **approach A** (row-by-row `INSERT`s with `mysql-connector-python`) or **approach B** (bulk upload with pandas + SQLAlchemy), described below.
 - Create a function `main` that calls `read_data`, `clean_data`, and `load_data` in sequence. Invoke `main` inside an `if __name__ == "__main__":` block.
 - Use logging to report status in each function.
 - Use a docstring at the beginning of each function.
@@ -257,7 +252,7 @@ SELECT * FROM mock LIMIT 5;
 
 ### Step 7: Develop a Python script to query the database
 
-In `src/sql_lab/`, create a new script `query.py` that retrieves data from the `mock` table you uploaded in Steps 4-6. Use [basic-sql.py](https://github.com/ksiller/DS2022/blob/main/class/04-sql/basic-sql.py) in the course repo as inspiration (especially `get_people_by_lastname` and `plot_continent_counts`), but adapt it to **your** columns in `mock`. Do not assume the `media.MOCK_DATA` schema from the example.
+In `src/sql_lab/`, create a new script `query.py` that retrieves data from the `mock` table in **your** `COMPUTING_ID_mock` database (the one you uploaded in Steps 4-6). Use [basic-sql.py](https://github.com/ksiller/DS2022/blob/main/class/04-sql/basic-sql.py) in the course repo as inspiration (especially `get_people_by_lastname` and `plot_continent_counts`), but adapt it to **your** columns in `mock`. Do not connect to the shared class `media` database or assume the `media.MOCK_DATA` schema from the example.
 
 The script should follow the same best practices as `process.py` (parameterized queries, env vars for credentials, logging, docstrings, comments).
 
