@@ -52,9 +52,9 @@ MySQL database access:
 - **DB host:** `ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com`
 - **DB port:** `3306`
 - **DB username:** your UVA computing ID
-- **DB password:** your UVA computing ID
+- **DB password:** your UVA computing ID — for `mycli`, set with `export MYSQL_PWD='COMPUTING_ID'` (do not use `-p` when redirecting SQL into stdin)
 
->**Note:** The AWS RDS instance is shared, but access is per student. You have a MySQL user named after your UVA computing ID (password = your computing ID) with read-write privileges **only** on your two databases: `COMPUTING_ID_media` and `COMPUTING_ID_mock` (e.g., `khs3z_media` and `khs3z_mock`). You cannot read or write other students' databases. Use `COMPUTING_ID_media` for Case Study 1 and `COMPUTING_ID_mock` for Case Study 2. Replace `COMPUTING_ID` with your UVA computing ID wherever you see it in this lab. **Do not use the shared `ds2022` account for this lab.**
+>**Note:** The AWS RDS instance is shared, but access is per student. You have a MySQL user named after your UVA computing ID (password = your computing ID) with read-write privileges **only** on your two databases: `COMPUTING_ID_media` and `COMPUTING_ID_mock` (e.g., `mst3k_media` and `mst3k_mock`). You cannot read or write other students' databases. Use `COMPUTING_ID_media` for Case Study 1 and `COMPUTING_ID_mock` for Case Study 2. Replace `COMPUTING_ID` with your UVA computing ID wherever you see it in this lab. **Do not use the shared `ds2022` account for this lab.**
 
 ## Case Study 1: SQL CLI & Scripts
 
@@ -76,19 +76,21 @@ Write SQL statements in `initialize.sql` that:
 
 ### Step 2: Execute Your SQL Script
 
-Execute your `initialize.sql` script against the MySQL database:
+Execute your `initialize.sql` script against the MySQL database. First export your password (same as your computing ID), then run `mycli` without `-p`. Redirected stdin cannot supply a password prompt:
 
 ```bash
-mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < initialize.sql
+export MYSQL_PWD='COMPUTING_ID'
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -D COMPUTING_ID_media < initialize.sql
 ```
 
-Replace `COMPUTING_ID` with your UVA computing ID. The `-D` flag selects your database, so your SQL script does not need its own `USE` statement. For example, if your computing ID is `khs3z`:
+Replace `COMPUTING_ID` with your UVA computing ID. The `-D` flag selects your database, so your SQL script does not need its own `USE` statement. For example, if your computing ID is `mst3k`:
 
 ```bash
-mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_media < initialize.sql
+export MYSQL_PWD='mst3k'
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u mst3k -D mst3k_media < initialize.sql
 ```
 
-**Password:** For MySQL access in AWS RDS, the password is the same as your computing ID.
+**Password:** Set `MYSQL_PWD` to your computing ID before any `mycli` command that redirects a SQL file into stdin (see Setup).
 
 **Hint:** See [Working with SQL](https://github.com/ksiller/DS2022/blob/main/class/04-sql/README.md) for more details on executing SQL scripts.
 
@@ -103,7 +105,8 @@ Create a new file `media_query.sql` that contains a SQL SELECT query. Your query
 Execute the query and save the output to a file:
 
 ```bash
-mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_media < media_query.sql > media_results.txt
+export MYSQL_PWD='COMPUTING_ID'
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -D COMPUTING_ID_media < media_query.sql > media_results.txt
 ```
 
 Command line options:
@@ -111,8 +114,8 @@ Command line options:
 - **-h:** host of the database instance
 - **-u:** username
 - **-P:** port (3306 is the MySQL default)
-- **-p:** prompt for password
 - **-D:** database to use
+- **MYSQL_PWD:** password via environment variable (required when redirecting SQL into `mycli`; do not use `-p` with stdin redirect)
 
 Include `initialize.sql`, `media_query.sql`, and `media_results.txt` in your `lab-04-sql` directory.
 
@@ -225,13 +228,15 @@ uv run python src/sql_lab/process.py
 Connect to your database and verify that the `mock` table exists and holds the uploaded rows:
 
 ```bash
-mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -p -D COMPUTING_ID_mock
+export MYSQL_PWD='COMPUTING_ID'
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u COMPUTING_ID -D COMPUTING_ID_mock
 ```
 
-For example, if your computing ID is `khs3z`:
+For example, if your computing ID is `mst3k`:
 
 ```bash
-mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u khs3z -p -D khs3z_mock
+export MYSQL_PWD='mst3k'
+mycli -h ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com -P 3306 -u mst3k -D mst3k_mock
 ```
 
 ```sql
