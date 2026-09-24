@@ -35,7 +35,7 @@ For a full `INSERT` example using the same pattern, see [Insert (Parameterized)]
 
 ## Setup
 
-Install the `mycli` command line tool. Follow the [mycli install instructions](https://github.com/ksiller/DS2022/blob/main/class/04-sql/README.md).
+Install the `mycli` command line tool. Follow the [mycli install instructions](https://github.com/ksiller/DS2022/blob/main/class/04-sql/README.md#setup).
 
 Fork this repository on GitHub (keep the default name), then clone your fork. Recommended location: `~/ds2022-fall-2026/lab-04-sql`.
 
@@ -137,14 +137,7 @@ export DBPASS='COMPUTING_ID'
 export DBNAME='COMPUTING_ID_mock'
 ```
 
-Replace `COMPUTING_ID` with your UVA computing ID. For example, if your computing ID is `khs3z`:
-
-```bash
-export DBHOST='ds2022.cgls84scuy1e.us-east-1.rds.amazonaws.com'
-export DBUSER='khs3z'
-export DBPASS='khs3z'
-export DBNAME='khs3z_mock'
-```
+Replace `COMPUTING_ID` with your UVA computing ID. 
 
 ### Step 1: Create mock data
 
@@ -217,7 +210,7 @@ Create a script `process.py` under `src/sql_lab/` (the package directory created
 
 **Load approach A: row-by-row inserts with `mysql-connector-python`:** loop over the DataFrame rows and `cursor.execute()` an `INSERT` for each row. Use parameterized queries (`%s` placeholders + a tuple of values). Building SQL with f-strings or string concatenation creates a [SQL injection](https://bobby-tables.com/python) vulnerability and must be avoided. Wrap the code that opens, uses, and closes the database connection in a `try`/`except` block. Include logging statements for success and errors. See [class/04-sql/](https://github.com/ksiller/DS2022/tree/main/class/04-sql/) for an example.
 
-**Load approach B: bulk upload with pandas + SQLAlchemy:** create a SQLAlchemy engine and call [`DataFrame.to_sql()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_sql.html) to write the whole DataFrame in one step. Add SQLAlchemy if needed (`uv add sqlalchemy`) and use a connection URL of the form `mysql+mysqlconnector://USER:PASS@HOST:PORT/DBNAME`. Wrap the code that opens, uses, and closes the database connection in a `try`/`except` block. Include logging statements for success and errors. See [class/04-sql/](https://github.com/ksiller/DS2022/tree/main/class/04-sql/) for an example.
+**Load approach B: bulk upload with pandas + SQLAlchemy:** create a SQLAlchemy engine and call [DataFrame.to_sql()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_sql.html) to write the whole DataFrame in one step. Add SQLAlchemy if needed (`uv add sqlalchemy`) and use a connection URL of the form `mysql+mysqlconnector://USER:PASS@HOST:PORT/DBNAME`. Wrap the code that opens, uses, and closes the database connection in a `try`/`except` block. Include logging statements for success and errors. See [class/04-sql/](https://github.com/ksiller/DS2022/tree/main/class/04-sql/) for an example.
 
 ### Step 5: Run your script to upload to database
 
